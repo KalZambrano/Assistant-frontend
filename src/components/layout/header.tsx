@@ -8,9 +8,9 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ isBackendOnline, activeProvider }) => {
   return (
-    <header className="min-h-[4.5rem] bg-white/95 backdrop-blur border-b border-slate-200 px-7 py-3 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30 shadow-sm">
+    <header className="min-h-18 bg-white/95 backdrop-blur border-b border-slate-200 px-7 py-3 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30 shadow-sm">
       <div className="flex items-center gap-3">
-        <div className="bg-gradient-to-br from-blue-600 to-indigo-600 text-white p-2.5 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20">
+        <div className="bg-linear-to-br from-blue-600 to-indigo-600 text-white p-2.5 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20">
           <Bot className="w-5 h-5" />
         </div>
         <div>

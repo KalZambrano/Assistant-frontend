@@ -35,7 +35,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <aside className="app-sidebar w-[17rem] h-full bg-[#0d1729] text-slate-300 flex flex-col shrink-0 border-r border-slate-800 overflow-y-auto">
+    <aside className="app-sidebar w-68 h-full bg-[#0d1729] text-slate-300 flex flex-col shrink-0 border-r border-slate-800 overflow-y-auto">
       <div className="px-5 py-5 border-b border-white/10">
         <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
           Navegación del Asistente
@@ -57,7 +57,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               }`}
             >
               <div className="flex items-center gap-3">
-                <Icon className={`w-[17px] h-[17px] ${isActive ? 'text-white' : 'text-slate-500'}`} />
+                <Icon className={`w-4.25 h-4.25 ${isActive ? 'text-white' : 'text-slate-500'}`} />
                 <span>{item.label}</span>
               </div>
               {item.badge && (
