@@ -107,19 +107,11 @@ export const CRMView: React.FC<CRMViewProps> = ({ contacts }) => {
       <div className="page-intro bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold text-slate-900">CRM Simulado (Contactos Locales)</h2>
-            <span className="text-[11px] font-semibold bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded-full border border-indigo-200">
-              Persistencia Local
-            </span>
+            <h2 className="text-xl font-bold text-slate-900">CRM (Contactos Locales)</h2>
           </div>
           <p className="text-sm text-slate-600 mt-1">
             Contactos actualizados y creados automáticamente mediante la herramienta <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">actualizar_contacto_en_crm</code>.
           </p>
-        </div>
-
-        <div className="flex items-center gap-2 text-xs text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <span>Simulación interna (sin CRM en la nube)</span>
         </div>
       </div>
 

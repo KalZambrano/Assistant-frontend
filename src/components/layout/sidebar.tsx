@@ -24,8 +24,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const navItems: { id: NavTab; label: string; icon: React.ComponentType<{ className?: string }>; badge?: number }[] = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'email', label: 'Procesador de Correos', icon: Mail },
-    { id: 'crm', label: 'CRM Simulado', icon: Users },
-    { id: 'calendar', label: 'Calendario Simulado', icon: Calendar },
+    { id: 'crm', label: 'CRM (Contactos)', icon: Users },
+    { id: 'calendar', label: 'Calendario', icon: Calendar },
     {
       id: 'runs',
       label: 'Historial de Runs',
@@ -76,9 +76,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <Info className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
           <div>
             <p className="font-semibold text-slate-200">UTP Consult · MVP</p>
-            <p className="text-[11px] leading-relaxed text-slate-500 mt-1">
-              Simulaciones locales sin APIs externas (Gmail, Google Cal, CRM real fuera de alcance).
-            </p>
           </div>
         </div>
       </div>
