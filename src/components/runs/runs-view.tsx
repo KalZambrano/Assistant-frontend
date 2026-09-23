@@ -79,12 +79,12 @@ export const RunsView: React.FC<RunsViewProps> = ({
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Runs List (4 cols) */}
-        <div className="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-2">
+        <div className="lg:col-span-4 max-h-350 bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block px-2 mb-2">
             Seleccionar Ejecución ({runs.length})
           </span>
 
-          <div className="space-y-1.5 max-h-[650px] overflow-y-auto pr-1">
+          <div className="space-y-1.5 max-h-300 overflow-y-auto p-2">
             {runs.map((r) => {
               const isSelected = String(activeRun?.id) === String(r.id);
               const hasSkipped = (r.toolCalls || []).some((tc) => tc.status === 'skipped');
