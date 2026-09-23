@@ -1,5 +1,17 @@
-import React, { useState } from 'react';
-import { Search, Building, Mail, Phone, Clock, UserCheck, ShieldCheck } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import {
+  Search,
+  Building,
+  Mail,
+  Phone,
+  Clock,
+  UserCheck,
+  ShieldCheck,
+  X,
+  ChevronRight,
+  Hash,
+  CalendarDays,
+} from 'lucide-react';
 import type { Contact, ContactStatus } from '../../types';
 
 interface CRMViewProps {
@@ -9,6 +21,23 @@ interface CRMViewProps {
 export const CRMView: React.FC<CRMViewProps> = ({ contacts }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+
+  useEffect(() => {
+    if (!selectedContact) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedContact(null);
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [selectedContact]);
 
   const filteredContacts = contacts.filter((contact) => {
     const name = contact.name || '';
@@ -43,10 +72,39 @@ export const CRMView: React.FC<CRMViewProps> = ({ contacts }) => {
     }
   };
 
+  const formatDate = (date?: string) => {
+    if (!date) return 'No registrada';
+
+    const parsedDate = new Date(date);
+    return Number.isNaN(parsedDate.getTime())
+      ? date
+      : parsedDate.toLocaleString('es-PE', {
+          dateStyle: 'medium',
+          timeStyle: 'short',
+        });
+  };
+
+  const detailRow = (
+    icon: React.ReactNode,
+    label: string,
+    value: React.ReactNode,
+    muted = false
+  ) => (
+    <div className="flex items-start gap-3 py-3 border-b border-slate-100 last:border-b-0">
+      <div className="mt-0.5 text-slate-400 shrink-0">{icon}</div>
+      <div className="min-w-0">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">{label}</p>
+        <p className={`mt-0.5 text-sm break-words ${muted ? 'text-slate-400' : 'text-slate-700'}`}>
+          {value || 'No registrado'}
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="page-intro bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold text-slate-900">CRM Simulado (Contactos Locales)</h2>
@@ -95,85 +153,128 @@ export const CRMView: React.FC<CRMViewProps> = ({ contacts }) => {
         </div>
       </div>
 
-      {/* Table */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-xs overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-600">
-            <thead className="bg-slate-50 text-slate-500 uppercase text-[11px] font-semibold border-b border-slate-200">
-              <tr>
-                <th className="px-5 py-3">Nombre</th>
-                <th className="px-5 py-3">Empresa</th>
-                <th className="px-5 py-3">Email</th>
-                <th className="px-5 py-3">Teléfono</th>
-                <th className="px-5 py-3">Estado</th>
-                <th className="px-5 py-3 text-right">Última Actualización</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {filteredContacts.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="px-5 py-10 text-center text-slate-400 text-sm">
-                    No se encontraron contactos con los criterios seleccionados.
-                  </td>
-                </tr>
-              ) : (
-                filteredContacts.map((contact) => (
-                  <tr key={contact.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="px-5 py-3.5 font-bold text-slate-900 flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold">
-                        {(contact.name || 'C').charAt(0).toUpperCase()}
-                      </div>
-                      <span>{contact.name || 'Sin Nombre'}</span>
-                    </td>
-                    <td className="px-5 py-3.5 font-medium text-slate-800">
-                      <div className="flex items-center gap-1.5">
-                        <Building className="w-3.5 h-3.5 text-slate-400" />
-                        <span>{contact.company}</span>
-                      </div>
-                    </td>
-                    <td className="px-5 py-3.5 font-mono text-xs text-slate-600">
-                      <div className="flex items-center gap-1.5">
-                        <Mail className="w-3.5 h-3.5 text-slate-400" />
-                        <span>{contact.email}</span>
-                      </div>
-                    </td>
-                    <td className="px-5 py-3.5 text-xs text-slate-500">
-                      {contact.phone ? (
-                        <div className="flex items-center gap-1.5">
-                          <Phone className="w-3.5 h-3.5 text-slate-400" />
-                          <span>{contact.phone}</span>
-                        </div>
-                      ) : (
-                        <span className="text-slate-300 italic">—</span>
-                      )}
-                    </td>
-                    <td className="px-5 py-3.5">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border ${getStatusBadge(
-                          contact.status
-                        )}`}
-                      >
-                        <UserCheck className="w-3 h-3" />
-                        {contact.status}
-                      </span>
-                    </td>
-                    <td className="px-5 py-3.5 text-right text-xs text-slate-500">
-                      {contact.lastUpdated ? (
-                        <div className="flex items-center justify-end gap-1">
-                          <Clock className="w-3 h-3 text-slate-400" />
-                          <span>{new Date(contact.lastUpdated).toLocaleDateString()}</span>
-                        </div>
-                      ) : (
-                        <span className="text-slate-400">Reciente</span>
-                      )}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+      {/* Contacts grid */}
+      {filteredContacts.length === 0 ? (
+        <div className="bg-white border border-slate-200 rounded-xl p-10 text-center shadow-xs">
+          <Search className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+          <h3 className="text-sm font-bold text-slate-800">No se encontraron contactos</h3>
+          <p className="text-xs text-slate-500 mt-1">Prueba con otro nombre, empresa, email o estado.</p>
         </div>
-      </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {filteredContacts.map((contact) => {
+            const contactName = contact.name || 'Sin nombre';
+            const companyName = contact.company || 'Sin empresa';
+
+            return (
+              <button
+                key={contact.id}
+                type="button"
+                onClick={() => setSelectedContact(contact)}
+                aria-label={`Ver información de ${contactName}`}
+                className="group bg-white border border-slate-200 rounded-xl p-5 text-left shadow-xs hover:border-blue-300 hover:shadow-md focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-sm font-bold shrink-0">
+                    {contactName.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-bold text-slate-900 truncate">{contactName}</h3>
+                    <div className="flex items-center gap-1.5 mt-1 text-sm text-slate-500">
+                      <Building className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+                      <span className="truncate">{companyName}</span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-blue-500 transition-colors shrink-0" />
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Contact detail drawer */}
+      {selectedContact && (
+        <div
+          className="fixed inset-0 z-50 bg-slate-950/35 backdrop-blur-[2px]"
+          role="presentation"
+          onClick={() => setSelectedContact(null)}
+        >
+          <aside
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-drawer-title"
+            className="ml-auto flex h-full w-full max-w-md flex-col overflow-y-auto bg-white shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="border-b border-slate-200 bg-gradient-to-br from-blue-50 to-white p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-base font-bold shrink-0">
+                    {(selectedContact.name || 'C').charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <h2 id="contact-drawer-title" className="text-lg font-bold text-slate-900 truncate">
+                      {selectedContact.name || 'Sin nombre'}
+                    </h2>
+                    <p className="text-sm text-slate-500 truncate">{selectedContact.company || 'Sin empresa'}</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedContact(null)}
+                  aria-label="Cerrar detalle del contacto"
+                  className="rounded-lg p-2 text-slate-400 hover:bg-white hover:text-slate-700 shrink-0"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="mt-5">
+                <span
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${getStatusBadge(
+                    selectedContact.status
+                  )}`}
+                >
+                  <UserCheck className="w-3.5 h-3.5" />
+                  {selectedContact.status || 'New'}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex-1 p-6">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Información del contacto</h3>
+              <div>
+                {detailRow(<Mail className="w-4 h-4" />, 'Email', selectedContact.email)}
+                {detailRow(
+                  <Phone className="w-4 h-4" />,
+                  'Teléfono',
+                  selectedContact.phone,
+                  !selectedContact.phone
+                )}
+                {detailRow(<Building className="w-4 h-4" />, 'Empresa', selectedContact.company, !selectedContact.company)}
+                {detailRow(<Hash className="w-4 h-4" />, 'ID de contacto', selectedContact.id)}
+                {detailRow(
+                  <Clock className="w-4 h-4" />,
+                  'Última actualización',
+                  formatDate(selectedContact.lastUpdated || selectedContact.updated_at),
+                  !selectedContact.lastUpdated && !selectedContact.updated_at
+                )}
+                {detailRow(
+                  <CalendarDays className="w-4 h-4" />,
+                  'Fecha de creación',
+                  formatDate(selectedContact.createdAt || selectedContact.created_at),
+                  !selectedContact.createdAt && !selectedContact.created_at
+                )}
+              </div>
+            </div>
+
+            <div className="border-t border-slate-200 bg-slate-50 px-6 py-4 text-xs text-slate-500">
+              Contacto almacenado en la persistencia local del CRM.
+            </div>
+          </aside>
+        </div>
+      )}
     </div>
   );
 };

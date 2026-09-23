@@ -32,7 +32,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ meetings }) => {
   return (
     <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="page-intro bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold text-slate-900">Calendario Local Simulado</h2>

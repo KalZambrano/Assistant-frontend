@@ -94,17 +94,17 @@ export const AppShell: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-100 font-sans text-slate-800">
+    <div className="app-shell flex flex-col min-h-screen bg-slate-100 font-sans text-slate-800">
       <Header isBackendOnline={isBackendOnline} activeProvider={activeProvider} />
 
-      <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
+      <div className="flex h-[calc(100vh-4.5rem)] overflow-hidden">
         <Sidebar
           currentTab={currentTab}
           onSelectTab={(tab) => setCurrentTab(tab)}
           pendingActionsCount={metrics.pendingActions}
         />
 
-        <main className="flex-1 p-6 overflow-y-auto max-w-7xl mx-auto w-full">
+        <main className="flex-1 p-7 overflow-y-auto max-w-[1600px] mx-auto w-full">
           {currentTab === 'dashboard' && (
             <DashboardView
               metrics={metrics}

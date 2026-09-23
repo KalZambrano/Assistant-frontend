@@ -28,16 +28,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Welcome / Hero Banner */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="page-intro bg-white border border-slate-200 rounded-xl p-6 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-slate-900">Panel de Control UTP Assistant</h2>
+          <h2 className="text-2xl font-extrabold tracking-tight text-slate-950">Panel de control UTP Assistant</h2>
           <p className="text-sm text-slate-600 mt-1">
             Supervisa el procesamiento automatizado de correos entrantes, la extracción de requerimientos y la ejecución de herramientas en CRM y Calendario local.
           </p>
         </div>
         <button
           onClick={() => onNavigate('email')}
-          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors shadow-xs"
+          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl text-sm font-bold transition-colors shadow-lg shadow-blue-600/20"
         >
           <Sparkles className="w-4 h-4" />
           <span>Procesar Nuevo Correo</span>
@@ -47,7 +47,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       {/* Primary Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="metric-card metric-card--blue bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Correos Procesados
@@ -62,7 +62,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="metric-card metric-card--indigo bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Contactos en CRM
@@ -77,7 +77,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="metric-card metric-card--teal bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Reuniones Agendadas
@@ -92,7 +92,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="metric-card metric-card--amber bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Acciones Pendientes / Omitidas
@@ -107,7 +107,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="metric-card metric-card--emerald bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Herramientas Exitosas
@@ -122,7 +122,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+        <div className="metric-card metric-card--rose bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               Herramientas Fallidas

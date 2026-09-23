@@ -35,14 +35,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <aside className="w-64 h-full bg-slate-900 text-slate-300 flex flex-col shrink-0 border-r border-slate-800 overflow-y-auto">
-      <div className="p-4 border-b border-slate-800/80">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+    <aside className="app-sidebar w-[17rem] h-full bg-[#0d1729] text-slate-300 flex flex-col shrink-0 border-r border-slate-800 overflow-y-auto">
+      <div className="px-5 py-5 border-b border-white/10">
+        <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">
           Navegación del Asistente
         </span>
       </div>
 
-      <nav className="p-3 space-y-1 flex-1">
+      <nav className="app-sidebar-nav p-4 space-y-1.5 flex-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentTab === item.id;
@@ -50,14 +50,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <button
               key={item.id}
               onClick={() => onSelectTab(item.id)}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-[13px] font-semibold transition-all ${
                 isActive
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/60'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-950/40'
+                  : 'text-slate-400 hover:text-slate-100 hover:bg-white/8'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                <Icon className={`w-[17px] h-[17px] ${isActive ? 'text-white' : 'text-slate-500'}`} />
                 <span>{item.label}</span>
               </div>
               {item.badge && (
@@ -71,12 +71,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </nav>
 
       {/* Academic context notice */}
-      <div className="p-4 border-t border-slate-800/80 text-xs text-slate-400 bg-slate-950/40">
+      <div className="app-sidebar-footer p-5 border-t border-white/10 text-xs text-slate-400 bg-black/15">
         <div className="flex items-start gap-2">
           <Info className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
           <div>
-            <p className="font-medium text-slate-300">UTP Consult - MVP</p>
-            <p className="text-[11px] text-slate-400 mt-0.5">
+            <p className="font-semibold text-slate-200">UTP Consult · MVP</p>
+            <p className="text-[11px] leading-relaxed text-slate-500 mt-1">
               Simulaciones locales sin APIs externas (Gmail, Google Cal, CRM real fuera de alcance).
             </p>
           </div>

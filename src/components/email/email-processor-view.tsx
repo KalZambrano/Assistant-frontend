@@ -70,7 +70,7 @@ export const EmailProcessorView: React.FC<EmailProcessorViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Top Header & Context */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="page-intro bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-bold text-slate-900">Procesador de Correos con IA</h2>
           <p className="text-sm text-slate-600 mt-1">
