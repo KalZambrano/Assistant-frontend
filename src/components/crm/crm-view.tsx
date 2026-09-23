@@ -6,7 +6,6 @@ import {
   Phone,
   Clock,
   UserCheck,
-  ShieldCheck,
   X,
   ChevronRight,
   Hash,

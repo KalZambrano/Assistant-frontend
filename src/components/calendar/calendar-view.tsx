@@ -3,7 +3,6 @@ import {
   Calendar as CalendarIcon,
   Clock,
   User,
-  ShieldAlert,
   CheckCircle2,
   AlertCircle,
   FileText,
@@ -35,21 +34,11 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ meetings }) => {
       <div className="page-intro bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold text-slate-900">Calendario Local Simulado</h2>
-            <span className="text-[11px] font-semibold bg-teal-50 text-teal-700 px-2.5 py-0.5 rounded-full border border-teal-200">
-              Gestión Interna
-            </span>
+            <h2 className="text-xl font-bold text-slate-900">Calendario</h2>
           </div>
           <p className="text-sm text-slate-600 mt-1">
             Reuniones creadas tras validar que el correo del cliente incluye fecha y hora exactas.
           </p>
-        </div>
-
-        <div className="flex items-center gap-2 text-xs text-amber-800 bg-amber-50 border border-amber-200 px-3.5 py-2 rounded-lg">
-          <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
-          <span>
-            <strong>Nota de Alcance:</strong> No sincronizado con Google Calendar. Persistencia local en backend.
-          </span>
         </div>
       </div>
 

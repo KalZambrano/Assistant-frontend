@@ -59,9 +59,6 @@ export const RunsView: React.FC<RunsViewProps> = ({
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-bold text-slate-900">Historial de Ejecuciones (Runs)</h2>
-            <span className="text-[11px] font-semibold bg-purple-50 text-purple-700 px-2.5 py-0.5 rounded-full border border-purple-200">
-              Auditoría y Trazabilidad IA
-            </span>
           </div>
           <p className="text-sm text-slate-600 mt-1">
             Visualiza el ciclo completo de interacción: entrada, análisis cognitivo, llamadas a herramientas y respuesta final.
