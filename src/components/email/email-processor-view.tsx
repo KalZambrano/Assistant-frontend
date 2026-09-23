@@ -74,7 +74,7 @@ export const EmailProcessorView: React.FC<EmailProcessorViewProps> = ({
         <div>
           <h2 className="text-xl font-bold text-slate-900">Procesador de Correos con IA</h2>
           <p className="text-sm text-slate-600 mt-1">
-            Simula la recepción de correos de clientes, analiza entidades con IA, valida requerimientos y ejecuta llamadas a herramientas en CRM y Calendario.
+            Recepción de correos de clientes, analiza entidades con IA, valida requerimientos y ejecuta llamadas a herramientas en CRM y Calendario.
           </p>
         </div>
 
@@ -119,7 +119,7 @@ export const EmailProcessorView: React.FC<EmailProcessorViewProps> = ({
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
               <Mail className="w-4 h-4 text-blue-600" />
-              Entrada de Correo Simulado
+              Entrada de Correo 
             </h3>
             <button
               type="button"
